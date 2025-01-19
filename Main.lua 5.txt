@@ -1,0 +1,35 @@
+-- Create a ScreenGui to hold the buttons
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create a background frame
+local backgroundFrame = Instance.new("Frame")
+backgroundFrame.Size = UDim2.new(0, 300, 0, 200) -- Set size of the frame
+backgroundFrame.Position = UDim2.new(0.5, -150, 0.5, -100) -- Center it on the screen
+backgroundFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- White background
+backgroundFrame.Parent = screenGui
+
+-- Create a button to display a message
+local freezeButton = Instance.new("TextButton")
+freezeButton.Size = UDim2.new(0, 250, 0, 50) -- Width: 250px, Height: 50px
+freezeButton.Position = UDim2.new(0.5, -125, 0.3, 0) -- Centered in the frame
+freezeButton.Text = "Freeze Trade"
+freezeButton.Parent = backgroundFrame
+
+-- Create a button to display another message
+local acceptButton = Instance.new("TextButton")
+acceptButton.Size = UDim2.new(0, 250, 0, 50) -- Width: 250px, Height: 50px
+acceptButton.Position = UDim2.new(0.5, -125, 0.6, 0) -- Centered in the frame
+acceptButton.Text = "Accept Trade"
+acceptButton.Parent = backgroundFrame
+
+-- Function to handle freezing a trade
+local function onFreezeTrade()
+    print("Trade has been frozen! You can remove pets now.")
+    -- Add any safe functionality here, like displaying a message
+end
+
+-- Function to handle accepting a trade
+local function onAcceptTrade()
+    print("Trade has been accepted!")
+    -- Add any safe functionality
